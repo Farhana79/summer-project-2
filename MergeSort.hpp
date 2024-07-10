@@ -1,3 +1,12 @@
+/**
+ * @file MergeSort.cpp
+ * @Farhana Sultana (farhana.sultana79@myhunter.cuny.edu)
+ * @brief This file for the MergeSort class
+ * @date 2024-06-30
+ *
+ * @copyright Copyright (c) 2024
+ *
+ */
 
 #ifndef TEST_MERGESORT_HPP
 #define TEST_MERGESORT_HPP
