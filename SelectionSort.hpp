@@ -3,23 +3,32 @@
 
 #include "SortingAlgo.hpp"
 
-template <typename DataType>
-class SelectionSort : public SortingAlgo<DataType> {
+
+
+template <class T>
+class SelectionSort : public SortingAlgo<T> {
 public:
-    // Constructor
+
+    /**
+     * @brief Constructor for SelectionSort class
+     *
+     * @param ascending: boolean indicating the order of sorting
+     */
     SelectionSort(const bool& ascending);
 
-    // Override sort function
-    void sort(std::vector<DataType>& data) override;
-
-    // Override clone function
-    SortingAlgo<DataType>* clone() const override;
-
+    /**
+     * @brief function for sorting the list using Selection sort algorithm
+     *
+     * @param list: reference to a vector of type T
+     *
+     * @post: sort the list using Selection sort
+     */
+    void sort(std::vector<T>& list) override;
 private:
-    // Helper function to find the minimum or maximum element
-    size_t findMinMax(const std::vector<DataType>& data, size_t start);
+    size_t findMinMax(const std::vector<T>& list,size_t start);
 };
 
 #include "SelectionSort.cpp"
-#endif // SELECTION_SORT_HPP
 
+
+#endif // SELECTION_SORT_HPP
