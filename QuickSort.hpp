@@ -7,57 +7,27 @@
  * @copyright Copyright (c) 2024
  *
  */
-
-#ifndef TEST_QUICKSORT_HPP
-#define TEST_QUICKSORT_HPP
-
+#ifndef QUICK_SORT_HPP
+#define QUICK_SORT_HPP
 
 #include "SortingAlgo.hpp"
 
-template <class T>
-class QuickSort : public SortingAlgo<T>{
+template <typename DataType>
+class QuickSort : public SortingAlgo<DataType> {
 public:
-    /**
-     * @brief Constructor for QuickSort class
-     *
-     * @param ascending: boolean indicating the order of sorting
-     */
-     
+    // Constructor
     QuickSort(const bool& ascending);
 
-    /**
-     * @brief function for sorting the list using QuickSort algorithm
-     *
-     * @param list: reference to a vector of type T
-     *
-     * @post: sort the list using QuickSort
-     */
-    void sort(std::vector<T>& list) override;
-private:
-    /**
-     * @brief Recursively sorts the list using QuickSort algorithm
-     *
-     * @param list: reference to a vector of type T
-     * @param low: starting index of the sublist
-     * @param high: ending index of the sublist
-     *
-     * @post: sort the sublist from index low to high
-     */
-    void quickSort(std::vector<T>& list, int low, int high);
+    // Override sort function
+    void sort(std::vector<DataType>& data) override;
 
-    /**
-     * @brief Partitions the list into two halves
-     *
-     * @param list: reference to a vector of type T
-     * @param low: starting index of the sublist
-     * @param high: ending index of the sublist
-     *
-     * @return pivot index after partition
-     */
-    int partition(std::vector<T>& list, int low, int high);
+    // Override clone function
+    SortingAlgo<DataType>* clone() const override;
+
+private:
+    void quickSort(std::vector<DataType>& data, int low, int high);
+    int partition(std::vector<DataType>& data, int low, int high);
 };
 
 #include "QuickSort.cpp"
-
-
-#endif //TEST_QUICKSORT_HPP
+#endif // QUICK_SORT_HPP
