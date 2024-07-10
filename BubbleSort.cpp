@@ -7,35 +7,37 @@
  * @copyright Copyright (c) 2024
  *
  */
- 
 #include "BubbleSort.hpp"
 
-template <class T>
-BubbleSort<T>::BubbleSort(const bool& ascending)
-        : SortingAlgo<T>("Bubble Sort", true, ascending) {}
+// Constructor
+template <typename DataType>
+BubbleSort<DataType>::BubbleSort(const bool& ascending)
+    : SortingAlgo<DataType>(ascending) {}
 
-template <class T>
-void BubbleSort<T>::sort(std::vector<T>& list) {
-    //resetting
-    this->comparisons_ =0;
-    this->swaps_ = 0;
-    // Bubble Sort algorithm
+// Function to sort the data using bubble sort
+template <typename DataType>
+void BubbleSort<DataType>::sort(std::vector<DataType>& data) {
+    this->swaps = 0;
+    this->comparisons = 0;
+    
     bool swapped;
-    for (size_t i = 0; i < list.size() - 1 && !list.empty(); i++) {
+    for (size_t i = 0; i < data.size() - 1; ++i) {
         swapped = false;
-        for (size_t j = 0; j < list.size() - i - 1; j++) {
-            // Compare adjacent elements using comparator
-            if (!this->comparator(list[j], list[j + 1]) && list[j] != list[j+1]) {
-                // Swap elements if they are in the wrong order
-                std::swap(list[j], list[j + 1]);
-                this->swaps_++;
+        for (size_t j = 0; j < data.size() - i - 1; ++j) {
+            if (this->comparator(data[j + 1], data[j])) {
+                std::swap(data[j], data[j + 1]);
+                ++this->swaps;
                 swapped = true;
             }
-            this->comparisons_++;
         }
-        // If no two elements were swapped in the inner loop, then break
         if (!swapped) {
             break;
         }
     }
+}
+
+// Function to clone the object
+template <typename DataType>
+SortingAlgo<DataType>* BubbleSort<DataType>::clone() const {
+    return new BubbleSort<DataType>(*this);
 }
