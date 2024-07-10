@@ -1,6 +1,6 @@
 /**
  * @file InsertionSort.hpp
- * @author
+ * @Farhana Sultana (farhana.sultana79@myhunter.cuny.edu)
  * @brief This file is the interface for the InsertionSort class
  * @date 2024-06-30
  *
