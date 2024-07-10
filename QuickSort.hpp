@@ -7,27 +7,56 @@
  * @copyright Copyright (c) 2024
  *
  */
-#ifndef QUICK_SORT_HPP
-#define QUICK_SORT_HPP
+#ifndef TEST_QUICKSORT_HPP
+#define TEST_QUICKSORT_HPP
+
 
 #include "SortingAlgo.hpp"
 
-template <typename DataType>
-class QuickSort : public SortingAlgo<DataType> {
+template <class T>
+class QuickSort : public SortingAlgo<T>{
 public:
-    // Constructor
+    /**
+     * @brief Constructor for QuickSort class
+     *
+     * @param ascending: boolean indicating the order of sorting
+     */
+     
     QuickSort(const bool& ascending);
 
-    // Override sort function
-    void sort(std::vector<DataType>& data) override;
-
-    // Override clone function
-    SortingAlgo<DataType>* clone() const override;
-
+    /**
+     * @brief function for sorting the list using QuickSort algorithm
+     *
+     * @param list: reference to a vector of type T
+     *
+     * @post: sort the list using QuickSort
+     */
+    void sort(std::vector<T>& list) override;
 private:
-    void quickSort(std::vector<DataType>& data, int low, int high);
-    int partition(std::vector<DataType>& data, int low, int high);
+    /**
+     * @brief Recursively sorts the list using QuickSort algorithm
+     *
+     * @param list: reference to a vector of type T
+     * @param low: starting index of the sublist
+     * @param high: ending index of the sublist
+     *
+     * @post: sort the sublist from index low to high
+     */
+    void quickSort(std::vector<T>& list, int low, int high);
+
+    /**
+     * @brief Partitions the list into two halves
+     *
+     * @param list: reference to a vector of type T
+     * @param low: starting index of the sublist
+     * @param high: ending index of the sublist
+     *
+     * @return pivot index after partition
+     */
+    int partition(std::vector<T>& list, int low, int high);
 };
 
 #include "QuickSort.cpp"
-#endif // QUICK_SORT_HPP
+
+
+#endif //TEST_QUICKSORT_HPP
