@@ -1,7 +1,7 @@
 /**
- * @file SortingAlgo.hpp
- * @author
- * @brief This file is the interface for the SortAlgo class
+ * @file MergeSort.cpp
+ * @Farhana Sultana (farhana.sultana79@myhunter.cuny.edu)
+ * @brief This file for the MergeSort class
  * @date 2024-06-30
  *
  * @copyright Copyright (c) 2024
@@ -9,7 +9,6 @@
  */
 #ifndef SORTING_ALGO_HPP
 #define SORTING_ALGO_HPP
-
 
 #include <string>
 #include <vector>
