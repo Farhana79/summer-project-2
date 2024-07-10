@@ -8,23 +8,33 @@
  *
  */
 
+
 #ifndef BUBBLE_SORT_HPP
 #define BUBBLE_SORT_HPP
 
 #include "SortingAlgo.hpp"
+#include <vector>
 
-template <typename DataType>
-class BubbleSort : public SortingAlgo<DataType> {
+template <class T>
+class BubbleSort : public SortingAlgo<T> {
 public:
-    // Constructor
+    /**
+     * @brief Constructor for BubbleSort class
+     *
+     * @param ascending: boolean indicating the order of sorting
+     */
     BubbleSort(const bool& ascending);
 
-    // Override sort function
-    void sort(std::vector<DataType>& data) override;
-
-    // Override clone function
-    SortingAlgo<DataType>* clone() const override;
+    /**
+     * @brief function for sorting the list using BubbleSort algorithm
+     *
+     * @param list: reference to a vector of type T
+     *
+     * @post: sort the list using BubbleSort
+     */
+    void sort(std::vector<T>& list) override;
 };
 
 #include "BubbleSort.cpp"
 #endif // BUBBLE_SORT_HPP
+
