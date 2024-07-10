@@ -1,6 +1,6 @@
 /**
  * @file MergeSort.cpp
- * @author
+ * @Farhana Sultana (farhana.sultana79@myhunter.cuny.edu)
  * @brief This file for the MergeSort class
  * @date 2024-06-30
  *
