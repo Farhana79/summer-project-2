@@ -10,51 +10,54 @@
 
 #include "QuickSort.hpp"
 
-// Constructor
-template <typename DataType>
-QuickSort<DataType>::QuickSort(const bool& ascending)
-    : SortingAlgo<DataType>(ascending) {}
 
-// Function to sort the data using quick sort
-template <typename DataType>
-void QuickSort<DataType>::sort(std::vector<DataType>& data) {
-    this->swaps = 0;
-    this->comparisons = 0;
-    quickSort(data, 0, data.size() - 1);
-}
-
-// Recursive function to implement quick sort
-template <typename DataType>
-void QuickSort<DataType>::quickSort(std::vector<DataType>& data, int low, int high) {
-    if (low < high) {
-        int pi = partition(data, low, high);
-        quickSort(data, low, pi - 1);
-        quickSort(data, pi + 1, high);
-    }
-}
-
-// Function to partition the array
-template <typename DataType>
-int QuickSort<DataType>::partition(std::vector<DataType>& data, int low, int high) {
-    DataType pivot = data[high];
+template <class T>
+int QuickSort<T>::partition(std::vector<T>& list, int low, int high){
+    // Choose the pivot element as the last element in the list
+    T pivot = list[high];
+    // Initialize index i to the lower bound of the partition
     int i = low - 1;
-
-    for (int j = low; j < high; ++j) {
-        if (this->comparator(data[j], pivot)) {
-            ++i;
-            std::swap(data[i], data[j]);
-            ++this->swaps;
+    // Loop through elements from low to high-1
+    for (int j = low; j <= high - 1; j++){
+        // Compare current element with the pivot using a comparator function
+        if (this -> comparator(list[j], pivot)){
+            i++;
+            // Swap elements at indices i and j and increment swap counter
+            std::swap(list[i], list[j]);
+            this -> swaps_++;
         }
-        ++this->comparisons;
+        // Increment comparison counter
+        this -> comparisons_++;
     }
-    std::swap(data[i + 1], data[high]);
-    ++this->swaps;
+    // Swap pivot element with element at index i+1 and increment swap counter
+    std::swap(list[i + 1], list[high]);
+    this -> swaps_++;
+    // Return the index of the pivot element
     return i + 1;
 }
 
-// Function to clone the object
-template <typename DataType>
-SortingAlgo<DataType>* QuickSort<DataType>::clone() const {
-    return new QuickSort<DataType>(*this);
+template <class T>
+QuickSort<T>::QuickSort(const bool& ascending)
+        : SortingAlgo<T>("Quick Sort", false, ascending) {};
+
+template <class T>
+void QuickSort<T>::sort(std::vector<T>& list) {
+    this->comparisons_ =0;
+    this->swaps_ = 0;
+    // Call quickSort function to sort the entire list
+    quickSort(list, 0, list.size() - 1);
+}
+
+template <class T>
+void QuickSort<T>::quickSort(std::vector<T>& list, int low, int high) {
+    // Base case: if the sublist has 1 or no elements, it is already sorted
+    if (low < high) {
+        // Partition the list and get the pivot index
+        int pivotIndex = partition(list, low, high);
+
+        // Recursively sort the left and right halves
+        quickSort(list, low, pivotIndex - 1);
+        quickSort(list, pivotIndex + 1, high);
+    }
 }
 
