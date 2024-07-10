@@ -1,24 +1,52 @@
-#ifndef MERGE_SORT_HPP
-#define MERGE_SORT_HPP
+
+#ifndef TEST_MERGESORT_HPP
+#define TEST_MERGESORT_HPP
+
 
 #include "SortingAlgo.hpp"
 
-template <typename DataType>
-class MergeSort : public SortingAlgo<DataType> {
+
+template <class T>
+class MergeSort : public SortingAlgo<T> {
 public:
-    // Constructor
+    /**
+     * @brief Constructor for MergeSort class
+     *
+     * @param ascending: boolean indicating the order of sorting
+     */
     MergeSort(const bool& ascending);
 
-    // Override sort function
-    void sort(std::vector<DataType>& data) override;
-
-    // Override clone function
-    SortingAlgo<DataType>* clone() const override;
-
+    /**
+     * @brief function for sorting the list using MergeSort algorithm
+     *
+     * @param list: reference to a vector of type T
+     *
+     * @post: sort the list using MergeSort
+     */
+    void sort(std::vector<T>& list) override;
 private:
-    void mergeSort(std::vector<DataType>& data, int left, int right);
-    void merge(std::vector<DataType>& data, int left, int mid, int right);
+    /**
+     *
+     * @brief Merges two sorted vectors into one sorted vector
+     *
+     * @param left: reference to the left vector
+     * @param right: reference to the right vector
+     *
+     * @return merged and sorted vector
+    */
+    std::vector<T> merge(std::vector<T>& left, std::vector<T>& right);
+
+    /**
+     * @brief Recursively splits and merges the list to sort it
+     *
+     * @param list: reference to a vector of type T
+     *
+     * @return sorted vector
+     */
+    std::vector<T> mergeSort(std::vector<T>& list);
 };
 
 #include "MergeSort.cpp"
-#endif // MERGE_SORT_HPP
+
+
+#endif //TEST_MERGESORT_HPP
