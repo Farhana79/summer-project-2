@@ -1,5 +1,13 @@
+/**
+ * @file MergeSort.cpp
+ * @Farhana Sultana (farhana.sultana79@myhunter.cuny.edu)
+ * @brief This file for the MergeSort class
+ * @date 2024-06-30
+ *
+ * @copyright Copyright (c) 2024
+ *
+ */
 #include "SelectionSort.hpp"
-
 
 template <class T>
 size_t SelectionSort<T>::findMinMax(const std::vector<T>& list, size_t start) {
