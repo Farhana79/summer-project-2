@@ -12,26 +12,18 @@
 #define BUBBLE_SORT_HPP
 
 #include "SortingAlgo.hpp"
-#include <vector>
 
-template <class T>
-class BubbleSort : public SortingAlgo<T> {
+template <typename DataType>
+class BubbleSort : public SortingAlgo<DataType> {
 public:
-    /**
-     * @brief Constructor for BubbleSort class
-     *
-     * @param ascending: boolean indicating the order of sorting
-     */
+    // Constructor
     BubbleSort(const bool& ascending);
 
-    /**
-     * @brief function for sorting the list using BubbleSort algorithm
-     *
-     * @param list: reference to a vector of type T
-     *
-     * @post: sort the list using BubbleSort
-     */
-    void sort(std::vector<T>& list) override;
+    // Override sort function
+    void sort(std::vector<DataType>& data) override;
+
+    // Override clone function
+    SortingAlgo<DataType>* clone() const override;
 };
 
 #include "BubbleSort.cpp"
