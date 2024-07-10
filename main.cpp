@@ -7,7 +7,6 @@
  * @copyright Copyright (c) 2024
  *
  */
-
 #include <iostream>
 #include <vector>
 #include "SortingAlgo.hpp"
@@ -101,3 +100,4 @@ int main(){
     printAlgorithms<int>(list_5); // expected output in `/expected_output/list_5.txt`
     printAlgorithms<int>(list_6); // expected output in `/expected_output/list_6.txt`
 }
+
