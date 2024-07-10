@@ -7,74 +7,77 @@
  * @copyright Copyright (c) 2024
  *
  */
+
 #include "MergeSort.hpp"
 
-// Constructor
-template <typename DataType>
-MergeSort<DataType>::MergeSort(const bool& ascending)
-    : SortingAlgo<DataType>(ascending) {}
-
-// Function to sort the data using merge sort
-template <typename DataType>
-void MergeSort<DataType>::sort(std::vector<DataType>& data) {
-    this->swaps = 0;
-    this->comparisons = 0;
-    mergeSort(data, 0, data.size() - 1);
-}
-
-// Recursive function to implement merge sort
-template <typename DataType>
-void MergeSort<DataType>::mergeSort(std::vector<DataType>& data, int left, int right) {
-    if (left < right) {
-        int mid = left + (right - left) / 2;
-        mergeSort(data, left, mid);
-        mergeSort(data, mid + 1, right);
-        merge(data, left, mid, right);
-    }
-}
-
-// Function to merge two halves
-template <typename DataType>
-void MergeSort<DataType>::merge(std::vector<DataType>& data, int left, int mid, int right) {
-    int n1 = mid - left + 1;
-    int n2 = right - mid;
-
-    std::vector<DataType> leftArr(n1);
-    std::vector<DataType> rightArr(n2);
-
-    for (int i = 0; i < n1; ++i)
-        leftArr[i] = data[left + i];
-    for (int i = 0; i < n2; ++i)
-        rightArr[i] = data[mid + 1 + i];
-
-    int i = 0, j = 0, k = left;
-    while (i < n1 && j < n2) {
-        if (this->comparator(leftArr[i], rightArr[j])) {
-            data[k] = leftArr[i];
-            ++i;
+template <class T>
+std::vector<T> MergeSort<T>::merge(std::vector<T>& left, std::vector<T>& right) {
+    // Vector to store the merged result
+    std::vector<T> result;
+    // Index for left and right vectors
+    size_t l = 0;
+    size_t r = 0;
+    // Merge the elements from left and right vectors into the result vector
+    while (l < left.size() && r < right.size()) {
+        // Compare elements using comparator and also check for equality to add equal elements from left first (<=)
+        if (this->comparator(left[l], right[r]) or (left[l] == right[r])) {
+            // Add element from left vector to result and move to the next element in left vector
+            result.push_back(left[l]);
+            l++;
         } else {
-            data[k] = rightArr[j];
-            ++j;
+            // Add element from right vector to result and move to the next element in right vector
+            result.push_back(right[r]);
+            r++;
+            // Increment swap count as adding an element from right half before left is to be counted as a swap operation
+            this -> swaps_++;
         }
-        ++k;
-        ++this->comparisons;
+        // Increment comparison count
+        this -> comparisons_++;
     }
-
-    while (i < n1) {
-        data[k] = leftArr[i];
-        ++i;
-        ++k;
+    // Add remaining elements from left vector to result
+    while (l < left.size()) {
+        result.push_back(left[l]);
+        l++;
     }
-
-    while (j < n2) {
-        data[k] = rightArr[j];
-        ++j;
-        ++k;
+    // Add remaining elements from right vector to result
+    while (r < right.size()) {
+        result.push_back(right[r]);
+        r++;
     }
+    // Return the merged and sorted result vector
+    return result;
 }
 
-// Function to clone the object
-template <typename DataType>
-SortingAlgo<DataType>* MergeSort<DataType>::clone() const {
-    return new MergeSort<DataType>(*this);
+template <class T>
+MergeSort<T>::MergeSort(const bool& ascending)
+        : SortingAlgo<T>("Merge Sort", true, ascending) {};
+
+template <class T>
+void MergeSort<T>::sort(std::vector<T>& list) {
+    this->comparisons_ = 0;
+    this->swaps_ = 0;
+    list = mergeSort(list);
+}
+
+
+template <class T>
+std::vector<T> MergeSort<T>::mergeSort(std::vector<T>& list) {
+    // Base case: if the list has 1 or no elements, it is already sorted
+    if (list.size() <= 1) {
+        return list;
+    }
+
+    // Find the middle index of the list
+    size_t mid = list.size() / 2;
+
+    // Split the list into left and right halves
+    std::vector<T> left(list.begin(), list.begin() + mid);
+    std::vector<T> right(list.begin() + mid, list.end());
+
+    // Recursively sort the left and right halves
+    left = mergeSort(left);
+    right = mergeSort(right);
+
+    // Merge the sorted halves and return the result
+    return merge(left, right);
 }
