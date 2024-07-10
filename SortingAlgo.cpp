@@ -9,63 +9,42 @@
  */
 #include "SortingAlgo.hpp"
 
-template <class T>
-bool SortingAlgo<T>::comparator(const T& a, const T& b) const {
-    return ascending_ ? a < b : a > b;
+// Constructor
+template <typename DataType>
+SortingAlgo<DataType>::SortingAlgo(const bool& ascending)
+    : swaps(0), comparisons(0), ascending(ascending) {}
+
+// Comparator function implementation
+template <typename DataType>
+bool SortingAlgo<DataType>::comparator(const DataType& a, const DataType& b) {
+    ++comparisons;
+    return ascending ? a < b : a > b;
 }
 
-template <class T>
-SortingAlgo<T>::SortingAlgo(const std::string& name, const bool& stable, const bool& ascending)
-        : name_(name), swaps_(0), comparisons_(0), stable_(stable), ascending_(ascending) {};
-
-template <class T>
-void SortingAlgo<T>::setName(const std::string& name) {
-    name_ = name;
+// Function to set the sorting order
+template <typename DataType>
+void SortingAlgo<DataType>::setOrder(const bool& order) {
+    ascending = order;
 }
 
-template <class T>
-void SortingAlgo<T>::setStable(const bool& stable) {
-    stable_ = stable;
+// Function to get the number of swaps
+template <typename DataType>
+int SortingAlgo<DataType>::getSwaps() const {
+    return swaps;
 }
 
-template <class T>
-void SortingAlgo<T>::setAscending(const bool& ascending) {
-    ascending_ = ascending;
+// Function to get the number of comparisons
+template <typename DataType>
+int SortingAlgo<DataType>::getComparisons() const {
+    return comparisons;
 }
 
-template <class T>
-std::string SortingAlgo<T>::getName() const {
-    return name_;
-}
-
-template <class T>
-bool SortingAlgo<T>::isStable() const {
-    return stable_;
-}
-
-template <class T>
-size_t SortingAlgo<T>::getSwaps() const {
-    return swaps_;
-}
-
-template <class T>
-size_t SortingAlgo<T>::getComparisons() const {
-    return comparisons_;
-}
-
-template <class T>
-bool SortingAlgo<T>::isAscending() const {
-    return ascending_;
-}
-
-template <class T>
-bool SortingAlgo<T>::isSorted(std::vector<T>& list) const {
-    if (list.empty()) return true;
-    for (size_t i = 1; i < list.size(); ++i) {
-        if (ascending_) {
-            if (list[i-1] > list[i]) return false;
-        } else {
-            if (list[i-1] < list[i]) return false;
+// Function to check if the data is sorted
+template <typename DataType>
+bool SortingAlgo<DataType>::isSorted(const std::vector<DataType>& data) const {
+    for (size_t i = 1; i < data.size(); ++i) {
+        if (!comparator(data[i - 1], data[i])) {
+            return false;
         }
     }
     return true;
