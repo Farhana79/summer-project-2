@@ -1,7 +1,7 @@
 /**
- * @file QuickSort.hpp
- * @author
- * @brief This file is the interface for the QuickSort class
+ * @file MergeSort.cpp
+ * @Farhana Sultana (farhana.sultana79@myhunter.cuny.edu)
+ * @brief This file for the MergeSort class
  * @date 2024-06-30
  *
  * @copyright Copyright (c) 2024
