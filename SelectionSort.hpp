@@ -1,9 +1,16 @@
+/**
+ * @file MergeSort.cpp
+ * @Farhana Sultana (farhana.sultana79@myhunter.cuny.edu)
+ * @brief This file for the MergeSort class
+ * @date 2024-06-30
+ *
+ * @copyright Copyright (c) 2024
+ *
+ */
 #ifndef SELECTION_SORT_HPP
 #define SELECTION_SORT_HPP
 
 #include "SortingAlgo.hpp"
-
-
 
 template <class T>
 class SelectionSort : public SortingAlgo<T> {
