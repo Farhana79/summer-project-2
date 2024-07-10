@@ -11,18 +11,26 @@
 #define INSERTION_SORT_HPP
 
 #include "SortingAlgo.hpp"
+#include <vector>
 
-template <typename DataType>
-class InsertionSort : public SortingAlgo<DataType> {
+template <class T>
+class InsertionSort : public SortingAlgo<T> {
 public:
-    // Constructor
+    /**
+     * @brief Constructor for InsertionSort class
+     *
+     * @param ascending: boolean indicating the order of sorting
+     */
     InsertionSort(const bool& ascending);
 
-    // Override sort function
-    void sort(std::vector<DataType>& data) override;
-
-    // Override clone function
-    SortingAlgo<DataType>* clone() const override;
+    /**
+     * @brief function for sorting the list using InsertionSort algorithm
+     *
+     * @param list: reference to a vector of type T
+     *
+     * @post: sort the list using InsertionSort
+     */
+    void sort(std::vector<T>& list) override;
 };
 
 #include "InsertionSort.cpp"
